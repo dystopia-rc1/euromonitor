@@ -1,0 +1,27 @@
+﻿@model IndexModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-left">
+    <h1 class="display-4">Your Books</h1>
+
+    @if (!Model.Subscriptions.Any())
+    {
+        <div>You have no subscriptions</div>
+    }
+
+    @foreach (var book in Model.Subscriptions)
+    {
+        <div>@book.Name - @Html.ActionLink("unsubscribe", "Remove", "Home", new { book = book.Name })</div>
+    }
+</div>
+
+<div class="text-left">
+    <h1 class="display-4">Full Catalogue</h1>
+
+    @foreach(var book in Model.AllBooks)
+    {
+        <div>@book.Name - @Html.ActionLink("subscribe", "Add", "Home", new { book = book.Name })</div>
+    }
+</div>
